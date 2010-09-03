@@ -85,6 +85,14 @@ public class AndroidMarketApi {
         return fetchBytes(request);
     }
 
+
+    public synchronized byte[] fetchThumbnail(String appId) throws MarketApiError {
+        Market.GetImageRequest request = Market.GetImageRequest.newBuilder().setAppId(appId)
+                .setImageUsage(Market.GetImageRequest.AppImageUsage.SCREENSHOT_THUMBNAIL)
+                .build();
+        return fetchBytes(request);
+    }
+
     public synchronized List<Market.App> executeRequest(Market.AppsRequest request) throws MarketApiError {
         sleepIfNeeded();
         final List<Market.App> apps = new ArrayList<Market.App>();
